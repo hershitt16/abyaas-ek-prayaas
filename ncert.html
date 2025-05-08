@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NCERT Textbooks - Abyaas Ek Prayaas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: black;
+      color: white;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    header {
+      font-weight: 900;
+      font-size: 3rem;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+      margin-bottom: 20px;
+    }
+    nav {
+      margin-bottom: 20px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #00bfff;
+    }
+    .subject-btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      box-shadow: 0 0 10px #3b82f6;
+    }
+    .subject-btn:hover {
+      background-color: #2563eb;
+      box-shadow: 0 0 20px #2563eb;
+    }
+    select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      margin-top: 10px;
+      width: 220px;
+      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      box-shadow: 0 0 10px #00bfff;
+      background-color: black;
+      color: white;
+      outline: none;
+    }
+    ul.chapter-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-top: 15px;
+      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    ul.chapter-list li {
+      margin-bottom: 12px;
+    }
+    ul.chapter-list li a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: 700;
+      text-shadow: 0 0 5px #00bfff;
+    }
+    ul.chapter-list li a:hover {
+      text-decoration: underline;
+    }
+    button.add-cart-btn {
+      margin-left: 15px;
+      background-color: #10b981;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 0 10px #10b981;
+      transition: background-color 0.3s ease;
+    }
+    button.add-cart-btn:hover {
+      background-color: #047857;
+      box-shadow: 0 0 20px #047857;
+    }
+  </style>
+</head>
+<body>
+  <header>NCERT Textbooks - Abyaas Ek Prayaas</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="answers.html">Answer PDFs</a>
+    <a href="cart.html">Cart</a>
+    <a href="fee.html">Fee Payment</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <div>
+      <h2>Select Subject</h2>
+      <div>
+        <button class="subject-btn" data-subject="Mathematics">Mathematics</button>
+        <button class="subject-btn" data-subject="Science">Science</button>
+        <button class="subject-btn" data-subject="Social Science">Social Science</button>
+      </div>
+    </div>
+
+    <div id="classSelection" style="display:none; margin-top:20px;">
+      <label for="classSelect">Select Class:</label>
+      <select id="classSelect">
+        <option value="">-- Select Class --</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
+    </div>
+
+    <div id="chaptersContainer" style="margin-top:20px;"></div>
+  </main>
+
+  <script>
+    const chaptersData = {
+      Mathematics: {
+        6: ["Knowing Our Numbers", "Whole Numbers", "Playing with Numbers"],
+        7: ["Fractions and Decimals", "Data Handling", "Integers"],
+        8: ["Understanding Quadrilaterals", "Rational Numbers", "Linear Equations in Two Variables"],
+        9: ["Polynomials", "Coordinate Geometry", "Introduction to Euclid's Geometry"],
+        10: ["Arithmetic Progressions", "Triangles", "Circles"],
+        11: ["Limits and Derivatives", "Relations and Functions", "Algebra"],
+        12: ["Integrals", "Differential Equations", "Vector Algebra"]
+      },
+      Science: {
+        6: ["Food: Where Does It Come From?", "Components of Food", "Fibre to Fabric"],
+        7: ["Acids, Bases and Salts", "Physical and Chemical Changes", "Weather, Climate and Adaptations"],
+        8: ["Synthetic Fibres and Plastics", "Materials: Metals and Non-metals", "Coal and Petroleum"],
+        9: ["The Fundamental Unit of Life", "The Structure and Functions of Animals", "Motion"],
+        10: ["The Periodic Table", "Light - Reflection and Refraction", "Electricity"],
+        11: ["Human Physiology", "The Cell Structure and Function", "Chemical Bonding"],
+        12: [
+          "Chapter 1 - Reproduction in Organisms",
+          "Chapter 2 - Sexual Reproduction in Flowering Plants",
+          "Chapter 3 - Human Reproduction",
+          "Chapter 4 - Reproductive Health",
+          "Chapter 5 - Principles of Inheritance and Variation",
+          "Chapter 6 - Molecular Basis of Inheritance",
+          "Chapter 7 - Evolution",
+          "Chapter 8 - Human Health and Disease",
+          "Chapter 9 - Strategies for Enhancement in Food Production",
+          "Chapter 10 - Microbes in Human Welfare",
+          "Chapter 11 - Biotechnology: Principles and Processes",
+          "Chapter 12 - Biotechnology and Its Applications",
+          "Chapter 13 - Organisms and Populations",
+          "Chapter 14 - Ecosystem",
+          "Chapter 15 - Biodiversity and Conservation",
+          "Chapter 16 - Environmental Issues"
+        ]
+      },
+      "Social Science": {
+        6: ["The Earth in the Solar System", "Globe: Latitudes and Longitudes", "Motivation"],
+        7: ["Our Environment", "The Indian Constitution", "The Earth’s Surface"],
+        8: ["Resources", "The Medieval Period", "The Modern Period"],
+        9: ["India - Size and Location", "Physical Features of India", "Democracy"],
+        10: ["Forest and Wildlife", "Water Resources", "Globalisation"],
+        11: ["Indian Constitution", "Political Theory", "Economic Development"],
+        12: ["Contemporary World Politics", "India and the Contemporary World", "Development"]
+      }
+    };
+
+    const subjectButtons = document.querySelectorAll('.subject-btn');
+    const classSelection = document.getElementById('classSelection');
+    const classSelect = document.getElementById('classSelect');
+    const chaptersContainer = document.getElementById('chaptersContainer');
+
+    let selectedSubject = null;
+
+    subjectButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        selectedSubject = button.getAttribute('data-subject');
+        classSelection.style.display = 'block';
+        chaptersContainer.innerHTML = '';
+        classSelect.value = '';
+      });
+    });
+
+    classSelect.addEventListener('change', () => {
+      const selectedClass = classSelect.value;
+      if (selectedClass && selectedSubject) {
+        const chapters = chaptersData[selectedSubject][selectedClass];
+        if (chapters) {
+          let html = '<h3>Chapters for ' + selectedSubject + ', Class ' + selectedClass + '</h3><ul class="chapter-list">';
+          chapters.forEach(chapter => {
+            let pdfLink = '';
+            if (selectedSubject === 'Science' && selectedClass === '12') {
+              // Real NCERT Class 12 Science chapter PDFs from official NCERT site
+              const chapterFileName = chapter.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '.pdf';
+              pdfLink = 'https://ncert.nic.in/textbook/pdf/' + chapterFileName;
+            } else {
+              // Placeholder PDF link
+              pdfLink = `pdfs/${selectedSubject.toLowerCase().replace(/ /g, '-')}/class-${selectedClass}/` + chapter.toLowerCase().replace(/ /g, '-') + '.pdf';
+            }
+            html += `<li><a href="${pdfLink}" target="_blank" download>${chapter}</a> <button onclick="addToCart('${chapter}', '${pdfLink}', 0)" class="add-cart-btn">Add to Cart (Free)</button></li>`;
+          });
+          html += '</ul>';
+          chaptersContainer.innerHTML = html;
+        } else {
+          chaptersContainer.innerHTML = '<p>No chapters found for this class.</p>';
+        }
+      } else {
+        chaptersContainer.innerHTML = '';
+      }
+    });
+
+    function addToCart(name, url, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({name, url, price});
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(name + ' added to cart.');
+    }
+  </script>
+</body>
+</html>
