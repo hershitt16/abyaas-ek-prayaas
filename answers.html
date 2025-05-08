@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Answer PDFs - Abyaas Ek Prayaas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 20px;
+      color: #1f2937;
+    }
+    header {
+      background-color: black;
+      padding: 10px 20px;
+      color: white;
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-align: center;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+      margin-bottom: 20px;
+    }
+    nav a {
+      color: #1f2937;
+      margin-right: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #3b82f6;
+    }
+    ul.answer-list {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    ul.answer-list li {
+      margin-bottom: 10px;
+    }
+    ul.answer-list li button {
+      margin-left: 10px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    ul.answer-list li button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <header>Answer PDFs - Abyaas Ek Prayaas</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="ncert.html">NCERT</a>
+    <a href="cart.html">Cart</a>
+    <a href="fee.html">Fee Payment</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h2>Available Answer PDFs</h2>
+    <ul class="answer-list" id="answerList">
+      <!-- Answer PDFs will be listed here -->
+    </ul>
+  </main>
+
+  <script>
+    const answerPDFs = [
+      { name: "Mathematics Class 10 Answers", url: "pdfs/answers/mathematics-class-10.pdf" },
+      { name: "Science Class 9 Answers", url: "pdfs/answers/science-class-9.pdf" },
+      { name: "Social Science Class 12 Answers", url: "pdfs/answers/social-science-class-12.pdf" }
+    ];
+
+    const answerList = document.getElementById('answerList');
+
+    answerPDFs.forEach(pdf => {
+      const li = document.createElement('li');
+      li.textContent = pdf.name;
+      const btn = document.createElement('button');
+      btn.textContent = 'Add to Cart';
+      btn.onclick = () => {
+        addToCart(pdf.name, pdf.url, 50); // Assuming answer PDFs cost Rs 50
+      };
+      li.appendChild(btn);
+      answerList.appendChild(li);
+    });
+
+    function addToCart(name, url, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({name, url, price});
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(name + ' added to cart.');
+    }
+  </script>
+</body>
+</html>
